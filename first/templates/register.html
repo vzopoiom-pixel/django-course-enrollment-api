@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация студента{% endblock %}
+
+{% block content %}
+    <h2>Регистрация студента</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+
+        <h3>Выбор курсов (до 3-х с уникальным приоритетом)</h3>
+        {{ formset.management_form }}
+
+        {% if formset.non_form_errors %}
+            <div class="errorlist">{{ formset.non_form_errors }}</div>
+        {% endif %}
+
+        {% for form in formset %}
+            <div class="course-card">
+                {{ form.as_p }}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn-primary">Зарегистрироваться</button>
+    </form>
+{% endblock %}

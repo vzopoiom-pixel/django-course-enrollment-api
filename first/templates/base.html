@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Course Enrollment{% endblock %}</title>
+    <style>
+        :root {
+            --bg-cream: #F2E1D0;
+            --terracotta: #854627;
+            --caramel: #B28753;
+            --olive: #7B7458;
+            --sand: #D4C7B4;
+            --dark-olive: #2D2D23;
+            --white-soft: #FAF4ED;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--dark-olive);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        header {
+            width: 100%;
+            max-width: 720px;
+            background-color: var(--dark-olive);
+            color: var(--bg-cream);
+            padding: 16px 24px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 20px rgba(45, 45, 35, 0.15);
+        }
+
+        header .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            color: var(--bg-cream);
+            text-decoration: none;
+        }
+
+        header nav {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        header a, .btn-link {
+            color: var(--sand);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        header a:hover, .btn-link:hover {
+            color: var(--caramel);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 720px;
+            background-color: var(--white-soft);
+            border: 1px solid var(--sand);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 12px 30px rgba(45, 45, 35, 0.08);
+        }
+
+        h2 {
+            color: var(--dark-olive);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            border-bottom: 2px solid var(--sand);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--terracotta);
+            margin: 22px 0 12px;
+            font-size: 1.15rem;
+        }
+
+        form p {
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--olive);
+        }
+
+        input, select {
+            padding: 11px 14px;
+            border: 1.5px solid var(--sand);
+            border-radius: 10px;
+            background-color: #fff;
+            color: var(--dark-olive);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--terracotta);
+        }
+
+        .helptext {
+            font-size: 0.8rem;
+            color: var(--olive);
+        }
+
+        .errorlist {
+            list-style: none;
+            color: var(--terracotta);
+            background-color: rgba(133, 70, 39, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--terracotta);
+            color: var(--bg-cream);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-olive);
+        }
+
+        .course-card {
+            background-color: var(--bg-cream);
+            border: 1px solid var(--sand);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--olive);
+            color: var(--bg-cream);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-top {
+            background-color: var(--terracotta);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{% url 'dashboard' %}" class="logo">🎓 CoursePortal</a>
+        <nav>
+            <a href="/api/docs/" target="_blank">Swagger API</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}">Курсы</a>
+                <a href="{% url 'profile' %}">Профиль</a>
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-link">Выйти</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Вход</a>
+                <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
