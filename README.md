@@ -21,7 +21,8 @@ A REST API built with **Django** and **Django REST Framework** for managing stud
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com
+git clone https://github.com/vzopoiom-pixel/django-course-enrollment-api.git
+
 cd django-course-enrollment-api
 ```
 
