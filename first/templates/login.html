@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}Вход в систему{% endblock %}
+{% block title %}Log In{% endblock %}
 
 {% block content %}
-    <h2>Вхід у систему</h2>
+    <h2>Log In</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn-primary">Войти</button>
+        <button type="submit" class="btn-primary">Log In</button>
     </form>
     <p style="margin-top: 16px; font-size: 0.9rem; color: var(--olive);">
-        Нет аккаунта? <a href="{% url 'register' %}" style="color: var(--terracotta); font-weight: 600;">Зарегистрироваться</a>
+        Don't have an account? <a href="{% url 'register' %}" style="color: var(--terracotta); font-weight: 600;">Register</a>
     </p>
 {% endblock %}

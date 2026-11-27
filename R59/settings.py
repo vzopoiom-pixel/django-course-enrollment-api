@@ -26,7 +26,7 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Course Enrollment API',
-    'DESCRIPTION': 'API для регистрации студентов и управления записью на курсы с приоритетами',
+    'DESCRIPTION': 'API for student registration and priority-based course enrollment management',
     'VERSION': '1.0.0',
 }
 

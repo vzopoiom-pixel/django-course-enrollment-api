@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title %}Мои курсы{% endblock %}
+{% block title %}My Courses{% endblock %}
 
 {% block content %}
-    <h2>Мои выбранные курсы</h2>
+    <h2>My Selected Courses</h2>
 
     {% for item in enrollments %}
         <div class="course-card" style="display: flex; justify-content: space-between; align-items: center;">
             <div>
                 <span class="badge {% if item.priority == 1 %}badge-top{% endif %}">
-                    Приоритет {{ item.priority }}
+                    Priority {{ item.priority }}
                 </span>
                 <strong style="font-size: 1.05rem;">{{ item.course.title }}</strong>
             </div>
         </div>
     {% empty %}
-        <p style="color: var(--olive);">Курсы пока не выбраны.</p>
+        <p style="color: var(--olive);">No courses selected yet.</p>
     {% endfor %}
 {% endblock %}

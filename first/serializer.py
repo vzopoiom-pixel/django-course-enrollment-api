@@ -35,6 +35,6 @@ class EnrollmentWriteSerializer(serializers.ModelSerializer):
             UniqueTogetherValidator(
                 queryset=Enrollment.objects.all(),
                 fields=['student', 'course'],
-                message="Этот студент уже записан на данный курс."
+                message="This student is already enrolled in this course."
             )
         ]

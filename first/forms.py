@@ -7,14 +7,14 @@ from .models import Course
 
 
 class StudentRegistrationForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=True, label="Имя")
-    last_name = forms.CharField(max_length=30, required=True, label="Фамилия")
+    first_name = forms.CharField(max_length=30, required=True, label="First Name")
+    last_name = forms.CharField(max_length=30, required=True, label="Last Name")
     email = forms.EmailField(required=True, label="Email")
-    age = forms.IntegerField(min_value=12, max_value=18, required=True, label="Возраст (12–18)")
+    age = forms.IntegerField(min_value=12, max_value=18, required=True, label="Age (12–18)")
     phone = forms.RegexField(
         regex=r'^\+380\d{9}$',
-        error_messages={'invalid': "Введите номер в формате +380XXXXXXXXX"},
-        label="Телефон"
+        error_messages={'invalid': "Enter a phone number in the format +380XXXXXXXXX"},
+        label="Phone"
     )
 
     class Meta:
@@ -24,7 +24,7 @@ class StudentRegistrationForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            raise ValidationError("Пользователь с таким email уже зарегистрирован.")
+            raise ValidationError("A user with this email is already registered.")
         return email
 
 
@@ -32,12 +32,12 @@ class CourseChoiceForm(forms.Form):
     course = forms.ModelChoiceField(
         queryset=Course.objects.all(),
         required=False,
-        label="Курс"
+        label="Course"
     )
     priority = forms.ChoiceField(
         choices=[(1, '1'), (2, '2'), (3, '3')],
         required=False,
-        label="Приоритет"
+        label="Priority"
     )
 
 
@@ -60,15 +60,15 @@ class BaseCourseFormSet(BaseFormSet):
                 continue
 
             if course in courses:
-                raise ValidationError("Курсы не могут повторяться.")
+                raise ValidationError("Courses cannot be duplicated.")
             courses.append(course)
 
             if priority in priorities:
-                raise ValidationError("Приоритеты должны быть уникальными (1, 2, 3).")
+                raise ValidationError("Priorities must be unique (1, 2, 3).")
             priorities.append(priority)
 
         if len(courses) == 0:
-            raise ValidationError("Выберите хотя бы один курс.")
+            raise ValidationError("Please select at least one course.")
 
 
 CourseFormSet = formset_factory(

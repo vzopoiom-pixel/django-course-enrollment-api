@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}Профиль студента{% endblock %}
+{% block title %}Student Profile{% endblock %}
 
 {% block content %}
-    <h2>Профиль студента</h2>
+    <h2>Student Profile</h2>
     <div class="course-card" style="line-height: 1.9;">
-        <p><strong>Логин:</strong> {{ user.username }}</p>
-        <p><strong>Имя и фамилия:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Возраст:</strong> {{ profile.age }} лет</p>
-        <p><strong>Телефон:</strong> {{ profile.phone }}</p>
+        <p><strong>Age:</strong> {{ profile.age }} years old</p>
+        <p><strong>Phone:</strong> {{ profile.phone }}</p>
     </div>
-    <a href="{% url 'dashboard' %}" class="btn-primary">← Назад к курсам</a>
+    <a href="{% url 'dashboard' %}" class="btn-primary">← Back to Courses</a>
 {% endblock %}
